@@ -80,7 +80,7 @@ struct FenwickTree {
     }
 };
 
-class Euler {
+class Euler {  /// @author - DIPANKAR KUMAR SINGH
 
     // TOUR 1 => Each Node Occour At Max two times in Euler's Path ... One at time of Entry , other at Exit
     // TOUR 2 => Zig - Zag Mode (node , c1 , node , c2 , node , node2 .....) : https://usaco.guide/CPH.pdf#page=174
@@ -212,6 +212,7 @@ class Euler {
     
     /// @brief sum along the path ( a<---> b) 
     /// @return `sum(a,b) = SumRootTo(a) + SumRootTo(b) - 2*SumRootTo(LCA(a,b))`
+    // !validate to check
     int queryOnPath(int a, int b) {
         if(first_t1[a] > first_t1[b]) swap(a,b) ;
         int c = lca(a,b) ;
