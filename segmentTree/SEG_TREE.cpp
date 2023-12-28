@@ -3,7 +3,7 @@
 
 class segmentTree
 {
-public:
+    private:
     int N = 1e6 + 10;
     std::vector<int> seg , lazy , v ;
  
@@ -11,6 +11,7 @@ public:
         return (a | b) ;
     }
 
+    public:
     segmentTree(int n) 
     {
         N = n;
@@ -35,7 +36,8 @@ public:
     int query(int l, int r){
         return query(0, 0, N - 1, l, r);
     }
- 
+    
+    private:
     void solvelazy(int n, int s, int e){
         if(lazy[n] == 0 ) return ;
 
