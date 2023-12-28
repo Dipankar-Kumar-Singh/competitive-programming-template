@@ -7,9 +7,16 @@ public:
     int N = 1e6 + 10;
     std::vector<int> seg , lazy , v ;
  
-    int mergeOP(int &a, int &b)
-    {
+    int mergeOP(int &a, int &b) {
         return (a | b) ;
+    }
+
+    segmentTree(int n) 
+    {
+        N = n;
+        v = std::vector<int>(n);
+        seg.resize(4 * N, 0);
+        lazy.resize(4 * N, 0);
     }
  
     segmentTree(std::vector<int> &vec)
@@ -21,20 +28,17 @@ public:
         build(0, 0, N - 1);
     }
  
-    void update(int l, int r, int value)
-    {
+    void update(int l, int r, int value){
         update(0, 0, N - 1, l, r, value);
     }
  
-    int query(int l, int r)
-    {
+    int query(int l, int r){
         return query(0, 0, N - 1, l, r);
     }
  
-    void solvelazy(int n, int s, int e)
-    {
+    void solvelazy(int n, int s, int e){
         if(lazy[n] == 0 ) return ;
- 
+
         seg[n] = lazy[n] ;
         if (s != e)
         {
@@ -46,16 +50,14 @@ public:
  
     void build(int n, int s, int e)
     {
-        if (s == e)
-        {
+        if (s == e)        {
             seg[n] = v[s];
             return;
         }
         int mid = (s + e) / 2;
         build(n * 2 + 1, s, mid);
         build(n * 2 + 2, mid + 1, e);
-        if (s != e)
-        {
+        if (s != e) {
             seg[n] = mergeOP(seg[2 * n + 1], seg[2 * n + 2]);
         }
     }
@@ -64,13 +66,11 @@ public:
     {
         solvelazy(n, s, e);
  
-        if (s > r or e < l)
-        {
+        if (s > r or e < l){
             return;
         }
  
-        if (s >= l and e <= r)
-        {
+        if (s >= l and e <= r){
             lazy[n] = value;
             solvelazy(n, s, e);
             return;
@@ -80,8 +80,7 @@ public:
         update(n * 2 + 1, s, mid, l, r, value);
         update(n * 2 + 2, mid + 1, e, l, r, value);
  
-        if (s != e)
-        {
+        if (s != e){
             seg[n] = mergeOP(seg[2 * n + 1], seg[2 * n + 2]);
         }
     }
@@ -90,12 +89,10 @@ public:
     {
         solvelazy(n, s, e);
  
-        if (s > r or e < l)
-        {
+        if (s > r or e < l){
             return 0LL;
         }
-        if (s >= l and e <= r)
-        {
+        if (s >= l and e <= r){
             return seg[n];
         }
  
